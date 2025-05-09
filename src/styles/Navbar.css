@@ -1,0 +1,538 @@
+import React, { useState, useEffect } from "react";
+import "../styles/Navbar.css";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle mobile menu toggle
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
+      <div className="navbar-container">
+        {/* Logo */}
+        <div className="navbar-logo">
+          <div className="logo-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="40" height="40"><rect width="256" height="256" fill="none"/><circle cx="176" cy="148" r="16"/><path d="M64.19,95.74A28,28,0,0,1,68,40L188,96a28,28,0,0,0,0-56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="92" y1="133.33" x2="92" y2="215.46" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><polyline points="48.94 156.3 132 112 132 224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><path d="M199.46,180A80,80,0,1,1,120.23,64.37" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+          </div>
+          <span className="logo-text">TVS Credit</span>
+        </div>
+
+        {/* Desktop Menu */}
+        <ul className="navbar-menu">
+          <li className="navbar-item active">
+            <a href="/" className="navbar-link">Home</a>
+          </li>
+          <li className="navbar-item dropdown">
+            <a href="/offers" className="navbar-link">
+              Offers
+              <span className="dropdown-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="12" height="12"><rect width="256" height="256" fill="none"/><path d="M216,112V56a8,8,0,0,0-8-8H48a8,8,0,0,0-8,8v56c0,96,88,120,88,120S216,208,216,112Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><polyline points="201.97 171.78 128 120 54.03 171.78" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+              </span>
+            </a>
+            <ul className="dropdown-menu">
+              <li><a href="/offers/festive">Festive Offers</a></li>
+              <li><a href="/offers/seasonal">Seasonal Deals</a></li>
+              <li><a href="/offers/special">Special Promotions</a></li>
+            </ul>
+          </li>
+          <li className="navbar-item dropdown">
+            <a href="/products" className="navbar-link">
+              Products
+              <span className="dropdown-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="12" height="12"><rect width="256" height="256" fill="none"/><path d="M216,112V56a8,8,0,0,0-8-8H48a8,8,0,0,0-8,8v56c0,96,88,120,88,120S216,208,216,112Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><polyline points="201.97 171.78 128 120 54.03 171.78" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+              </span>
+            </a>
+            <ul className="dropdown-menu">
+              <li><a href="/products/two-wheeler">Two-Wheeler Loans</a></li>
+              <li><a href="/products/personal">Personal Loans</a></li>
+              <li><a href="/products/used-car">Used Car Finance</a></li>
+              <li><a href="/products/business">Business Loans</a></li>
+            </ul>
+          </li>
+          <li className="navbar-item">
+            <a href="/about" className="navbar-link">About</a>
+          </li>
+          <li className="navbar-item">
+            <a href="/contact" className="navbar-link">Contact</a>
+          </li>
+        </ul>
+
+        {/* Action Button */}
+        <div className="navbar-actions">
+          <a href="/apply" className="navbar-button">Apply Now</a>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="hamburger-menu" onClick={toggleMenu}>
+          <span className={`hamburger-line ${isOpen ? "open" : ""}`}></span>
+          <span className={`hamburger-line ${isOpen ? "open" : ""}`}></span>
+          <span className={`hamburger-line ${isOpen ? "open" : ""}`}></span>
+        </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      <div className={`mobile-menu ${isOpen ? "open" : ""}`}>
+        <ul className="mobile-menu-items">
+          <li className="mobile-menu-item active">
+            <a href="/">Home</a>
+          </li>
+          <li className="mobile-menu-item mobile-dropdown">
+            <div className="mobile-dropdown-header">
+              <a href="/offers">Offers</a>
+              <span className="mobile-dropdown-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="16" height="16"><rect width="256" height="256" fill="none"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="88" y1="128" x2="168" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="128" y1="88" x2="128" y2="168" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+              </span>
+            </div>
+            <ul className="mobile-submenu">
+              <li><a href="/offers/festive">Festive Offers</a></li>
+              <li><a href="/offers/seasonal">Seasonal Deals</a></li>
+              <li><a href="/offers/special">Special Promotions</a></li>
+            </ul>
+          </li>
+          <li className="mobile-menu-item mobile-dropdown">
+            <div className="mobile-dropdown-header">
+              <a href="/products">Products</a>
+              <span className="mobile-dropdown-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="16" height="16"><rect width="256" height="256" fill="none"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="88" y1="128" x2="168" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="128" y1="88" x2="128" y2="168" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+              </span>
+            </div>
+            <ul className="mobile-submenu">
+              <li><a href="/products/two-wheeler">Two-Wheeler Loans</a></li>
+              <li><a href="/products/personal">Personal Loans</a></li>
+              <li><a href="/products/used-car">Used Car Finance</a></li>
+              <li><a href="/products/business">Business Loans</a></li>
+            </ul>
+          </li>
+          <li className="mobile-menu-item">
+            <a href="/about">About</a>
+          </li>
+          <li className="mobile-menu-item">
+            <a href="/contact">Contact</a>
+          </li>
+          <li className="mobile-menu-item mobile-action">
+            <a href="/apply" className="mobile-button">Apply Now</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+```
+
+```css
+/* Navbar Styles */
+
+/* Main navbar container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 70px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Logo styling */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  width: 40px;
+  height: 40px;
+  background-color: #16a34a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+/* Desktop menu styling */
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  position: relative;
+  margin: 0 0.5rem;
+}
+
+.navbar-link {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar-link:hover {
+  color: #16a34a;
+}
+
+.navbar-item.active .navbar-link {
+  color: #16a34a;
+  position: relative;
+}
+
+.navbar-item.active .navbar-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 1rem;
+  right: 1rem;
+  height: 3px;
+  background-color: #16a34a;
+  border-radius: 3px;
+}
+
+/* Dropdown styling */
+.dropdown-icon {
+  margin-left: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 0.5rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.navbar-item.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  display: block;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 0.5rem 1.5rem;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f0f9f0;
+  color: #16a34a;
+}
+
+/* Action button */
+.navbar-button {
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.navbar-button:hover {
+  background-color: #15803d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hamburger menu (mobile) */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  transition: all 0.3s ease;
+}
+
+.hamburger-line.open:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger-line.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-line.open:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.open {
+  height: auto;
+  padding: 1rem 0;
+}
+
+.mobile-menu-items {
+  list-style: none;
+  margin: 0;
+  padding: 0 2rem;
+}
+
+.mobile-menu-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu-item a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+}
+
+.mobile-menu-item.active > a {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+/* Mobile dropdown styling */
+.mobile-dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mobile-dropdown-icon {
+  transition: transform 0.3s ease;
+}
+
+.mobile-dropdown-header.active .mobile-dropdown-icon {
+  transform: rotate(45deg);
+}
+
+.mobile-submenu {
+  list-style: none;
+  margin: 0.5rem 0 0 0;
+  padding: 0 0 0 1rem;
+  display: none;
+}
+
+.mobile-submenu.active {
+  display: block;
+}
+
+.mobile-submenu li {
+  padding: 0.5rem 0;
+}
+
+.mobile-submenu li a {
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+/* Mobile action button */
+.mobile-action {
+  margin-top: 1rem;
+}
+
+.mobile-button {
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.mobile-button:hover {
+  background-color: #15803d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .navbar-container {
+    padding: 0 1.5rem;
+  }
+  
+  .navbar-item {
+    margin: 0 0.25rem;
+  }
+  
+  .navbar-link {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+@media (max-width: 991px) {
+  /* Hide desktop menu and show mobile menu controls */
+  .navbar-menu,
+  .navbar-actions {
+    display: none;
+  }
+  
+  .hamburger-menu {
+    display: flex;
+  }
+  
+  .mobile-menu {
+    display: block;
+  }
+  
+  .navbar-container {
+    height: 60px;
+  }
+}
+
+/* Special animations and effects */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar.scrolled .navbar-container {
+  height: 60px;
+}
+
+.navbar:not(.scrolled) {
+  animation: fadeInDown 0.5s;
+}
+
+/* Green theme enhancements */
+.mobile-dropdown-header.active a,
+.mobile-submenu li a:hover {
+  color: #16a34a;
+}
+
+/* Custom hover effect for navbar items */
+.navbar-item::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background-color: #16a34a;
+  transition: width 0.3s ease;
+}
+
+.navbar-item:hover::before {
+  width: calc(100% - 2rem);
+}
+
+.navbar-item.active::before {
+  width: calc(100% - 2rem);
+}
+
+/* Give extra white space to dropdpwns to prevent accidental closeup */
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+/* Print styles */
+@media print {
+  .navbar {
+    position: static;
+    box-shadow: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navbar-button,
+  .hamburger-menu,
+  .dropdown-icon {
+    display: none;
+  }
+}

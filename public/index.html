@@ -1,0 +1,635 @@
+import React, { useState, useEffect } from "react";
+import "../styles/Navbar.css";
+
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll event to change navbar appearance on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Toggle mobile menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <nav className={`navbar ${isScrolled ? "navbar-scrolled" : ""}`}>
+      <div className="navbar-container">
+        {/* Logo */}
+        <div className="navbar-logo">
+          <a href="/" className="logo-link">
+            <div className="logo-container">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="40" height="40"><rect width="256" height="256" fill="none"/><circle cx="176" cy="148" r="16"/><path d="M64.19,95.74A28,28,0,0,1,68,40L188,96a28,28,0,0,0,0-56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="92" y1="133.33" x2="92" y2="215.46" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><polyline points="48.94 156.3 132 112 132 224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><path d="M199.46,180A80,80,0,1,1,120.23,64.37" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+              <span className="logo-text">TVS Credit</span>
+            </div>
+          </a>
+        </div>
+        
+        {/* Desktop Navigation */}
+        <ul className="nav-menu">
+          <li className="nav-item active">
+            <a href="/" className="nav-link">Home</a>
+          </li>
+          <li className="nav-item dropdown">
+            <a href="#offers" className="nav-link">
+              Offers
+              <span className="dropdown-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="12" height="12"><rect width="256" height="256" fill="none"/><rect x="40" y="40" width="176" height="176" rx="8" transform="translate(256 0) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="160" y1="160" x2="96" y2="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><polyline points="160 112 160 160 112 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+              </span>
+            </a>
+            <div className="dropdown-content">
+              <a href="#festive">Festive Offers</a>
+              <a href="#seasonal">Seasonal Deals</a>
+              <a href="#exclusive">Exclusive Promotions</a>
+            </div>
+          </li>
+          <li className="nav-item dropdown">
+            <a href="#products" className="nav-link">
+              Products
+              <span className="dropdown-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="12" height="12"><rect width="256" height="256" fill="none"/><rect x="40" y="40" width="176" height="176" rx="8" transform="translate(256 0) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="160" y1="160" x2="96" y2="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><polyline points="160 112 160 160 112 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+              </span>
+            </a>
+            <div className="dropdown-content">
+              <a href="#two-wheeler">Two Wheeler Loans</a>
+              <a href="#used-car">Used Car Loans</a>
+              <a href="#personal">Personal Loans</a>
+              <a href="#business">Business Loans</a>
+            </div>
+          </li>
+          <li className="nav-item">
+            <a href="#about" className="nav-link">About</a>
+          </li>
+          <li className="nav-item">
+            <a href="#contact" className="nav-link">Contact</a>
+          </li>
+        </ul>
+        
+        {/* Call to action button */}
+        <div className="nav-cta">
+          <a href="#apply" className="apply-now-btn">Apply Now</a>
+        </div>
+        
+        {/* Mobile menu button */}
+        <div className="mobile-menu-icon" onClick={toggleMenu}>
+          {isMenuOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="24" height="24"><rect width="256" height="256" fill="none"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><rect x="88" y="88" width="80" height="80" rx="12"/></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="24" height="24"><rect width="256" height="256" fill="none"/><polyline points="24 180 68 164 108 180 148 164 188 180 232 164" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="24" y1="128" x2="232" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><path d="M208,172.73V184a32,32,0,0,1-32,32H80a32,32,0,0,1-32-32V171.27" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><path d="M48.2,92a8,8,0,0,1-7.83-10.29C49.49,53.24,85.26,32,128,32s78.52,21.25,87.63,49.73A8,8,0,0,1,207.8,92Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+          )}
+        </div>
+      </div>
+      
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="mobile-nav">
+          <ul className="mobile-nav-menu">
+            <li className="mobile-nav-item">
+              <a href="/" className="mobile-nav-link">Home</a>
+            </li>
+            <li className="mobile-nav-item mobile-dropdown">
+              <div className="mobile-dropdown-title" onClick={(e) => {
+                e.currentTarget.parentElement.classList.toggle("open");
+              }}>
+                Offers
+                <span className="mobile-dropdown-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="14" height="14"><rect width="256" height="256" fill="none"/><rect x="40" y="40" width="176" height="176" rx="8" transform="translate(256 0) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="160" y1="160" x2="96" y2="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><polyline points="160 112 160 160 112 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+                </span>
+              </div>
+              <div className="mobile-dropdown-content">
+                <a href="#festive">Festive Offers</a>
+                <a href="#seasonal">Seasonal Deals</a>
+                <a href="#exclusive">Exclusive Promotions</a>
+              </div>
+            </li>
+            <li className="mobile-nav-item mobile-dropdown">
+              <div className="mobile-dropdown-title" onClick={(e) => {
+                e.currentTarget.parentElement.classList.toggle("open");
+              }}>
+                Products
+                <span className="mobile-dropdown-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="14" height="14"><rect width="256" height="256" fill="none"/><rect x="40" y="40" width="176" height="176" rx="8" transform="translate(256 0) rotate(90)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="160" y1="160" x2="96" y2="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><polyline points="160 112 160 160 112 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+                </span>
+              </div>
+              <div className="mobile-dropdown-content">
+                <a href="#two-wheeler">Two Wheeler Loans</a>
+                <a href="#used-car">Used Car Loans</a>
+                <a href="#personal">Personal Loans</a>
+                <a href="#business">Business Loans</a>
+              </div>
+            </li>
+            <li className="mobile-nav-item">
+              <a href="#about" className="mobile-nav-link">About</a>
+            </li>
+            <li className="mobile-nav-item">
+              <a href="#contact" className="mobile-nav-link">Contact</a>
+            </li>
+            <li className="mobile-nav-item">
+              <a href="#apply" className="mobile-apply-now-btn">Apply Now</a>
+            </li>
+          </ul>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
+```
+
+```css
+/* Navbar.css - Styling for the TVS Credit navigation bar */
+
+/* Base navbar styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  padding: 10px 0;
+  height: 70px;
+}
+
+.navbar-scrolled {
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.15);
+  height: 60px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+/* Logo styles */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: #16a34a;
+  letter-spacing: 0.5px;
+}
+
+/* Desktop navigation menu */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin: 0 8px;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 10px 12px;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-link:hover {
+  color: #16a34a;
+}
+
+.active .nav-link {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.dropdown-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  transition: transform 0.2s ease;
+}
+
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+}
+
+.dropdown:hover .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 220px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  padding: 8px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 1001;
+  border-top: 3px solid #16a34a;
+}
+
+.dropdown:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f5f5f5;
+  color: #16a34a;
+}
+
+/* CTA Button */
+.nav-cta {
+  margin-left: 16px;
+}
+
+.apply-now-btn {
+  display: inline-block;
+  background-color: #16a34a;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(22, 163, 74, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.apply-now-btn:hover {
+  background-color: #15803d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(22, 163, 74, 0.25);
+}
+
+/* Mobile menu icon */
+.mobile-menu-icon {
+  display: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* Mobile navigation */
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  z-index: 999;
+  max-height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+.mobile-nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-item {
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-nav-link {
+  display: block;
+  color: #333;
+  padding: 16px 24px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.mobile-dropdown-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  cursor: pointer;
+  color: #333;
+  font-size: 16px;
+}
+
+.mobile-dropdown-icon {
+  transition: transform 0.3s ease;
+}
+
+.mobile-dropdown.open .mobile-dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.mobile-dropdown-content {
+  display: none;
+  background-color: #f9f9f9;
+  padding: 8px 0;
+}
+
+.mobile-dropdown.open .mobile-dropdown-content {
+  display: block;
+}
+
+.mobile-dropdown-content a {
+  padding: 12px 24px 12px 40px;
+  display: block;
+  color: #333;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.2s ease;
+}
+
+.mobile-dropdown-content a:hover {
+  color: #16a34a;
+}
+
+.mobile-apply-now-btn {
+  display: block;
+  background-color: #16a34a;
+  color: white;
+  text-align: center;
+  margin: 16px 24px;
+  padding: 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .nav-menu, .nav-cta {
+    display: none;
+  }
+  
+  .mobile-menu-icon {
+    display: flex;
+  }
+  
+  .mobile-nav {
+    display: block;
+  }
+
+  .navbar-container {
+    padding: 0 16px;
+  }
+}
+
+/* Animation for mobile menu */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-nav {
+  animation: slideDown 0.3s ease forwards;
+}
+
+/* Extra green theme decorative elements */
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #16a34a, #22c55e, #16a34a);
+}
+
+/* Print styles */
+@media print {
+  .navbar {
+    position: static;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc;
+    height: auto;
+  }
+  
+  .nav-menu, .nav-cta, .mobile-menu-icon {
+    display: none !important;
+  }
+}
+
+/* Accessibility focus styles */
+.nav-link:focus,
+.dropdown-content a:focus,
+.apply-now-btn:focus,
+.mobile-nav-link:focus,
+.mobile-apply-now-btn:focus {
+  outline: 2px solid #16a34a;
+  outline-offset: 2px;
+}
+```
+
+```jsx
+import React from "react";
+import FestiveOfferCard from "./components/FestiveOfferCard";
+import Navbar from "./components/Navbar";
+import "./styles/FestiveOfferCard.css";
+import "./styles/Navbar.css";
+
+function App() {
+  // Sample offer data for the TVS Credit festive offer
+  const festiveOffer = {
+    title: "Diwali Dhamaka Finance Offer",
+    description: "Celebrate this festive season with TVS Credit's special financing options tailored for your needs. Enjoy exclusive benefits and hassle-free approvals.",
+    benefits: [
+      "Interest rates starting at just 6.99% p.a.",
+      "Zero processing fee for limited period",
+      "Instant approval within 3 hours",
+      "Extended repayment tenure options"
+    ],
+    validTill: "November 30, 2023",
+    savingsPercent: "25",
+    onApply: () => console.log("Festive offer application initiated")
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <Navbar />
+      <div className="pt-24 pb-12 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              <span className="text-green-600">TVS Credit</span> Festive Offers
+            </h1>
+            <p className="mt-3 max-w-2xl mx-auto text-gray-500 sm:text-lg">
+              Exclusive deals to celebrate the festive season with India's leading NBFC.
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <FestiveOfferCard offer={festiveOffer} />
+          </div>
+          
+          <div className="mt-12 text-center text-sm text-gray-500">
+            <p>
+              TVS Credit Services Ltd. - A leading Non-Banking Finance Company in India
+            </p>
+            <p className="mt-2">
+              © {new Date().getFullYear()} TVS Credit. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#16a34a" /> <!-- Green theme color for browser chrome on mobile -->
+    <meta name="description" content="TVS Credit - Leading NBFC in India offering special festive finance options" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Preconnect to CDN for performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Google Fonts - Matching TVS Credit's brand identity -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>TVS Credit - Festive Offers</title>
+    
+    <!-- Additional meta tags for SEO -->
+    <meta property="og:title" content="TVS Credit - Festive Offers" />
+    <meta property="og:description" content="Exclusive festive season finance offers from TVS Credit" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Custom styles for the application -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+          "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #16a34a;
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: #15803d;
+      }
+      
+      /* Improved focus styling for accessibility */
+      *:focus {
+        outline: 2px solid #16a34a;
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

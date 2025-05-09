@@ -1,0 +1,118 @@
+import React, { useState, useEffect } from "react";
+import "../styles/Navbar.css";
+
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrolled]);
+
+  // Toggle mobile menu
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  return (
+    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+      <div className="navbar-container">
+        {/* Logo */}
+        <div className="logo-container">
+          <div className="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="36" height="36"><rect width="256" height="256" fill="none"/><path d="M24,192V64a8,8,0,0,1,8-8H224a8,8,0,0,1,8,8V192a8,8,0,0,1-8,8H160l-26.34-26.34a8,8,0,0,0-11.32,0L96,200H32A8,8,0,0,1,24,192Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><circle cx="82" cy="126" r="22" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><circle cx="174" cy="126" r="22" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+          </div>
+          <span className="logo-text">TVS Credit</span>
+        </div>
+
+        {/* Desktop Navigation */}
+        <ul className="nav-links">
+          <li className="nav-item active">
+            <a href="#home">Home</a>
+          </li>
+          <li className="nav-item">
+            <a href="#offers">Offers</a>
+            <div className="dropdown">
+              <a href="#festive-offers">Festive Offers</a>
+              <a href="#seasonal-offers">Seasonal Offers</a>
+              <a href="#special-deals">Special Deals</a>
+            </div>
+          </li>
+          <li className="nav-item">
+            <a href="#products">Products</a>
+            <div className="dropdown">
+              <a href="#two-wheeler">Two Wheeler Loans</a>
+              <a href="#used-car">Used Car Loans</a>
+              <a href="#personal-loan">Personal Loans</a>
+            </div>
+          </li>
+          <li className="nav-item">
+            <a href="#about">About</a>
+          </li>
+          <li className="nav-item">
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
+
+        {/* Call to Action */}
+        <div className="cta-container">
+          <a href="#apply" className="nav-button">Apply Now</a>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="hamburger" onClick={toggleMenu}>
+          <span className={`bar ${menuOpen ? "active" : ""}`}></span>
+          <span className={`bar ${menuOpen ? "active" : ""}`}></span>
+          <span className={`bar ${menuOpen ? "active" : ""}`}></span>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        <ul className="mobile-links">
+          <li className="mobile-item">
+            <a href="#home" onClick={toggleMenu}>Home</a>
+          </li>
+          <li className="mobile-item mobile-dropdown">
+            <span className="mobile-dropdown-title">Offers</span>
+            <ul className="mobile-dropdown-content">
+              <li><a href="#festive-offers" onClick={toggleMenu}>Festive Offers</a></li>
+              <li><a href="#seasonal-offers" onClick={toggleMenu}>Seasonal Offers</a></li>
+              <li><a href="#special-deals" onClick={toggleMenu}>Special Deals</a></li>
+            </ul>
+          </li>
+          <li className="mobile-item mobile-dropdown">
+            <span className="mobile-dropdown-title">Products</span>
+            <ul className="mobile-dropdown-content">
+              <li><a href="#two-wheeler" onClick={toggleMenu}>Two Wheeler Loans</a></li>
+              <li><a href="#used-car" onClick={toggleMenu}>Used Car Loans</a></li>
+              <li><a href="#personal-loan" onClick={toggleMenu}>Personal Loans</a></li>
+            </ul>
+          </li>
+          <li className="mobile-item">
+            <a href="#about" onClick={toggleMenu}>About</a>
+          </li>
+          <li className="mobile-item">
+            <a href="#contact" onClick={toggleMenu}>Contact</a>
+          </li>
+          <li className="mobile-item">
+            <a href="#apply" className="mobile-button" onClick={toggleMenu}>Apply Now</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

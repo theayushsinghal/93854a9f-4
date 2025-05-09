@@ -1,0 +1,866 @@
+import React, { useState, useEffect } from "react";
+import "../styles/Navbar.css";
+
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll event to change navbar appearance
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Toggle mobile menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <nav className={`navbar ${isScrolled ? "navbar-scrolled" : ""}`}>
+      <div className="navbar-container">
+        {/* Logo */}
+        <div className="navbar-logo">
+          <div className="logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="40" height="40"><rect width="256" height="256" fill="none"/><circle cx="176" cy="148" r="16"/><path d="M64.19,95.74A28,28,0,0,1,68,40L188,96a28,28,0,0,0,0-56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><line x1="92" y1="133.33" x2="92" y2="215.46" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><polyline points="48.94 156.3 132 112 132 224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><path d="M199.46,180A80,80,0,1,1,120.23,64.37" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+          </div>
+          <span className="logo-text">TVS Credit</span>
+        </div>
+
+        {/* Desktop Navigation Links */}
+        <div className="navbar-links-desktop">
+          <a href="#home" className="nav-link active">Home</a>
+          <div className="nav-dropdown">
+            <a href="#offers" className="nav-link">
+              Offers <span className="dropdown-arrow">▼</span>
+            </a>
+            <div className="dropdown-content">
+              <a href="#festive-offers">Festive Offers</a>
+              <a href="#special-financing">Special Financing</a>
+              <a href="#cashback">Cashback Deals</a>
+            </div>
+          </div>
+          <div className="nav-dropdown">
+            <a href="#products" className="nav-link">
+              Products <span className="dropdown-arrow">▼</span>
+            </a>
+            <div className="dropdown-content">
+              <a href="#two-wheeler">Two-Wheeler Loans</a>
+              <a href="#used-car">Used Car Loans</a>
+              <a href="#personal-loan">Personal Loans</a>
+              <a href="#business-loan">Business Loans</a>
+            </div>
+          </div>
+          <a href="#about" className="nav-link">About</a>
+          <a href="#contact" className="nav-link">Contact</a>
+        </div>
+
+        {/* Customer Support and Apply Button */}
+        <div className="navbar-actions">
+          <div className="customer-support">
+            <span className="support-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="16" height="16"><rect width="256" height="256" fill="none"/><path d="M96.44,156c2.54,11.35,15.7,20,31.56,20,17.67,0,32-10.75,32-24,0-32-62.22-20-62.22-48,0-13.25,12.55-24,30.22-24,13.25,0,23.63,6,28,14.66" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><path d="M214,146.69A48,48,0,0,1,146.69,214,88.07,88.07,0,0,1,42,109.31,48,48,0,0,1,109.31,42,88.07,88.07,0,0,1,214,146.69Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+            </span>
+            <span className="support-text">1800-103-5005</span>
+          </div>
+          <button className="apply-now-btn">Apply Now</button>
+        </div>
+
+        {/* Mobile Menu Toggle Button */}
+        <div className="mobile-menu-toggle" onClick={toggleMenu}>
+          <div className={`hamburger ${isMenuOpen ? "open" : ""}`}>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Menu */}
+      <div className={`navbar-mobile ${isMenuOpen ? "show" : ""}`}>
+        <a href="#home" className="nav-link-mobile active">Home</a>
+        
+        <div className="mobile-accordion">
+          <div className="accordion-header">
+            <a href="#offers" className="nav-link-mobile">Offers</a>
+            <span className="accordion-icon">+</span>
+          </div>
+          <div className="accordion-content">
+            <a href="#festive-offers" className="sub-link">Festive Offers</a>
+            <a href="#special-financing" className="sub-link">Special Financing</a>
+            <a href="#cashback" className="sub-link">Cashback Deals</a>
+          </div>
+        </div>
+        
+        <div className="mobile-accordion">
+          <div className="accordion-header">
+            <a href="#products" className="nav-link-mobile">Products</a>
+            <span className="accordion-icon">+</span>
+          </div>
+          <div className="accordion-content">
+            <a href="#two-wheeler" className="sub-link">Two-Wheeler Loans</a>
+            <a href="#used-car" className="sub-link">Used Car Loans</a>
+            <a href="#personal-loan" className="sub-link">Personal Loans</a>
+            <a href="#business-loan" className="sub-link">Business Loans</a>
+          </div>
+        </div>
+        
+        <a href="#about" className="nav-link-mobile">About</a>
+        <a href="#contact" className="nav-link-mobile">Contact</a>
+        
+        <div className="mobile-actions">
+          <div className="customer-support-mobile">
+            <span className="support-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="16" height="16"><rect width="256" height="256" fill="none"/><path d="M96.44,156c2.54,11.35,15.7,20,31.56,20,17.67,0,32-10.75,32-24,0-32-62.22-20-62.22-48,0-13.25,12.55-24,30.22-24,13.25,0,23.63,6,28,14.66" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/><path d="M214,146.69A48,48,0,0,1,146.69,214,88.07,88.07,0,0,1,42,109.31,48,48,0,0,1,109.31,42,88.07,88.07,0,0,1,214,146.69Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"/></svg>
+            </span>
+            <span className="support-text">1800-103-5005</span>
+          </div>
+          <button className="apply-now-btn-mobile">Apply Now</button>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+```
+
+```css
+/* Navbar.css - Styling for TVS Credit Navbar */
+
+/* Main Navbar Styles */
+.navbar {
+  width: 100%;
+  background-color: #16a34a; /* Green to match theme */
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for navbar contents */
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Scrolled navbar effect */
+.navbar-scrolled {
+  background-color: rgba(22, 163, 74, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo Styles */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Desktop Navigation Links */
+.navbar-links-desktop {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.2rem;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #e2e8f0;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 3px;
+  background-color: white;
+  bottom: -5px;
+  left: 15%;
+  border-radius: 10px;
+}
+
+/* Dropdown Menu Styles */
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-arrow {
+  font-size: 0.7rem;
+  margin-left: 3px;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 0.5rem 0;
+  z-index: 1001;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-dropdown:hover .dropdown-content {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-content a {
+  color: #4b5563;
+  padding: 0.7rem 1.4rem;
+  text-decoration: none;
+  display: block;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  padding-left: 1.6rem;
+}
+
+/* Navbar Actions */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.customer-support {
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.support-icon {
+  margin-right: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.support-text {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.apply-now-btn {
+  background-color: white;
+  color: #16a34a;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.apply-now-btn:hover {
+  background-color: #f0fdf4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bar {
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Navigation Menu */
+.navbar-mobile {
+  display: none;
+  background-color: #15803d; /* Slightly darker green for contrast */
+  padding: 1rem 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.navbar-mobile.show {
+  max-height: 100vh;
+}
+
+.nav-link-mobile {
+  color: white;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  display: block;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link-mobile.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile Accordion */
+.mobile-accordion {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.accordion-icon {
+  padding-right: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.mobile-accordion.active .accordion-content {
+  max-height: 200px;
+}
+
+.sub-link {
+  color: #e2e8f0;
+  padding: 0.8rem 2.5rem;
+  display: block;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobile-actions {
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.customer-support-mobile {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  justify-content: center;
+}
+
+.apply-now-btn-mobile {
+  background-color: white;
+  color: #16a34a;
+  border: none;
+  border-radius: 4px;
+  padding: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .navbar-links-desktop {
+    display: none;
+  }
+  
+  .navbar-actions {
+    display: none;
+  }
+  
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .navbar-mobile {
+    display: block;
+  }
+  
+  .navbar-container {
+    padding: 0.6rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Animation for dropdown */
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Special class to enable JavaScript control of accordions */
+.mobile-accordion.active .accordion-content {
+  max-height: 200px;
+}
+
+.mobile-accordion.active .accordion-icon {
+  transform: rotate(45deg);
+}
+
+/* Script to enable accordion functionality */
+document.addEventListener("DOMContentLoaded", function() {
+  const accordionHeaders = document.querySelectorAll(".accordion-header");
+  
+  accordionHeaders.forEach(header => {
+    header.addEventListener("click", function() {
+      const accordion = this.parentElement;
+      accordion.classList.toggle("active");
+    });
+  });
+});
+```
+
+```javascript
+import React from "react";
+import FestiveOfferCard from "./components/FestiveOfferCard";
+import Navbar from "./components/Navbar";
+import "./styles/FestiveOfferCard.css";
+import "./styles/Navbar.css";
+
+function App() {
+  // Sample offer data for the TVS Credit festive offer
+  const festiveOffer = {
+    title: "Diwali Dhamaka Finance Offer",
+    description: "Celebrate this festive season with TVS Credit's special financing options tailored for your needs. Enjoy exclusive benefits and hassle-free approvals.",
+    benefits: [
+      "Interest rates starting at just 6.99% p.a.",
+      "Zero processing fee for limited period",
+      "Instant approval within 3 hours",
+      "Extended repayment tenure options"
+    ],
+    validTill: "November 30, 2023",
+    savingsPercent: "25",
+    onApply: () => console.log("Festive offer application initiated")
+  };
+
+  return (
+    <div className="app-container">
+      <Navbar />
+      <div className="content-container min-h-screen bg-gray-100 py-12 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              <span className="text-green-600">TVS Credit</span> Festive Offers
+            </h1>
+            <p className="mt-3 max-w-2xl mx-auto text-gray-500 sm:text-lg">
+              Exclusive deals to celebrate the festive season with India's leading NBFC.
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <FestiveOfferCard offer={festiveOffer} />
+          </div>
+          
+          <div className="mt-12 text-center text-sm text-gray-500">
+            <p>
+              TVS Credit Services Ltd. - A leading Non-Banking Finance Company in India
+            </p>
+            <p className="mt-2">
+              © {new Date().getFullYear()} TVS Credit. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#16a34a" /> <!-- Green theme color for browser chrome on mobile -->
+    <meta name="description" content="TVS Credit - Leading NBFC in India offering special festive finance options" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Preconnect to CDN for performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Google Fonts - Poppins for modern, clean look that matches TVS Credit brand identity -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>TVS Credit - Festive Offers</title>
+    
+    <!-- Additional meta tags for SEO -->
+    <meta property="og:title" content="TVS Credit - Festive Offers" />
+    <meta property="og:description" content="Exclusive festive season finance offers from TVS Credit" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="msapplication-TileColor" content="#16a34a" />
+    <meta name="msapplication-navbutton-color" content="#16a34a" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#16a34a" />
+    <meta name="format-detection" content="telephone=yes" />
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Custom styles for the application -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+          "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #16a34a;
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: #15803d;
+      }
+      
+      /* Improved focus styling for accessibility */
+      *:focus {
+        outline: 2px solid #16a34a;
+        outline-offset: 2px;
+      }
+      
+      /* Add space for fixed navbar */
+      #root {
+        padding-top: 70px; /* Adjust based on navbar height */
+      }
+      
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+```
+
+```css
+/* Festive Offer Card Custom Styles */
+
+/* Adding festival-themed decorative elements */
+.festive-card {
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem; /* Add spacing from navbar */
+}
+
+.festive-card::before,
+.festive-card::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  opacity: 0.1;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0;
+}
+
+.festive-card::before {
+  top: -15px;
+  left: -15px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='%2316a34a'%3E%3Cpath d='M12 1L9 9H2L7 14.5L5 22L12 17.5L19 22L17 14.5L22 9H15L12 1Z'/%3E%3C/svg%3E");
+  transform: rotate(-15deg);
+}
+
+.festive-card::after {
+  bottom: -15px;
+  right: -15px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='%2316a34a'%3E%3Cpath d='M12 1L9 9H2L7 14.5L5 22L12 17.5L19 22L17 14.5L22 9H15L12 1Z'/%3E%3C/svg%3E");
+  transform: rotate(15deg);
+}
+
+/* Enhanced hover effects */
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+}
+
+/* Pulsing animation for limited-time tag */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.bg-green-500 {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Custom scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #e5e7eb;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #16a34a;
+  border-radius: 20px;
+}
+
+/* Decorative divider */
+.decorative-divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent, #16a34a, transparent);
+  margin: 12px 0;
+}
+
+/* Custom animation for the "Apply Now" button */
+@keyframes shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.apply-button {
+  background-size: 200% auto;
+  background-image: linear-gradient(90deg, #16a34a 0%, #22c55e 50%, #16a34a 100%);
+  transition: all 0.3s ease;
+}
+
+.apply-button:hover {
+  background-position: right center;
+  animation: shine 1.5s infinite;
+}
+
+/* Festive decoration borders */
+.festive-border {
+  position: relative;
+}
+
+.festive-border::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(
+    to right,
+    #16a34a,
+    #16a34a 10px,
+    #22c55e 10px,
+    #22c55e 20px
+  );
+}
+
+/* App container with adjustment for fixed navbar */
+.app-container {
+  width: 100%;
+  height: 100%;
+}
+
+.content-container {
+  padding-top: 80px; /* Add extra padding to account for fixed navbar */
+}
+
+/* Ensure card doesn't conflict with navbar styles */
+.w-full.max-w-md.mx-auto {
+  z-index: 1; /* Lower z-index than navbar */
+}
+
+/* Media Queries for better responsiveness */
+@media (max-width: 640px) {
+  .festive-card::before,
+  .festive-card::after {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .festive-border::after {
+    height: 3px;
+  }
+  
+  .content-container {
+    padding-top: 70px; /* Adjust for smaller navbar on mobile */
+  }
+}
+
+/* Print styles for the offer card */
+@media print {
+  .festive-card {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+  
+  .bg-gradient-to-r {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .apply-button {
+    border: 1px solid #16a34a !important;
+    color: #16a34a !important;
+    background: white !important;
+  }
+  
+  .festive-border::after {
+    display: none !important;
+  }
+  
+  .navbar {
+    display: none !important; /* Hide navbar when printing */
+  }
+  
+  .content-container {
+    padding-top: 0 !important; /* Remove padding when printing */
+  }
+}
+
+/* Adjust for transition between navbar and content */
+@media (min-width: 1024px) {
+  .content-container {
+    padding-top: 100px; /* More space on larger screens */
+  }
+}
